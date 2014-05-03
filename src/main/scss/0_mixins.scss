@@ -1,0 +1,71 @@
+/* =============================================================================
+   SCSS Mixins
+   ========================================================================== */
+
+@mixin rounded ($top_left: 5px, $top_right: $top_left, $bottom_right: $top_left, $bottom_left: $top_left) {
+	@if $top_left != -1px {
+		-webkit-border-top-left-radius: $top_left;
+		-moz-border-radius-topleft: $top_left;
+		border-top-left-radius: $top_left;
+	}
+
+	@if $top_right != -1px {
+		-webkit-border-top-right-radius: $top_right;
+		-moz-border-radius-topright: $top_right;
+		border-top-right-radius: $top_right;
+	}
+
+	@if $bottom_right != -1px {
+		-webkit-border-bottom-right-radius: $bottom_right;
+		-moz-border-radius-bottomright: $bottom_right;
+		border-bottom-right-radius: $bottom_right;
+	}
+
+	@if $bottom_left != -1px {
+		-webkit-border-bottom-left-radius: $bottom_left;
+		-moz-border-radius-bottomleft: $bottom_left;
+		border-bottom-left-radius: $bottom_left;
+	}
+}
+
+@mixin gradient ($start_color, $end_color: $start_color - #333, $angle: 0, $image: false) {
+
+	@if ($image == false) {
+		background: $start_color;
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$start_color}', endColorstr='#{$end_color}',GradientType='0');
+		background-image: -webkit-gradient(linear, left top, left bottom, from(#{$start_color}), to(#{$end_color}));
+		background-image: -webkit-linear-gradient(top, $start_color, $end_color);
+		background-image: -moz-linear-gradient(top, $start_color, $end_color);
+		background-image: -ms-linear-gradient(top, $start_color, $end_color);
+		background-image: -o-linear-gradient(top, $start_color, $end_color);
+		background-image: linear-gradient(top, $start_color, $end_color);
+	} @else {
+		background: $start_color;
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$start_color}', endColorstr='#{$end_color}',GradientType='0');
+		background-image: url($image);
+		background-image: url($image), -webkit-gradient(linear, left top, left bottom, from(#{$start_color}), to(#{$end_color}));
+		background-image: url($image), -webkit-linear-gradient(top, $start_color, $end_color);
+		background-image: url($image), -moz-linear-gradient(top, $start_color, $end_color);
+		background-image: url($image), -ms-linear-gradient(top, $start_color, $end_color);
+		background-image: url($image), -o-linear-gradient(top, $start_color, $end_color);
+		background-image: url($image),  linear-gradient(top, $start_color, $end_color);
+	}
+
+}
+
+@mixin box-shadow ($arg_1, $arg_2: false, $arg_3: false, $arg_4: false) {
+	$output: $arg_1;	
+	@if ($arg_2 != false) { $output: $output, $arg_2; }
+	@if ($arg_3 != false) { $output: $output, $arg_3; }
+	@if ($arg_4 != false) { $output: $output, $arg_4; }
+	
+	-moz-box-shadow: $output;
+	-webkit-box-shadow: $output;
+	box-shadow: $output;
+}
+
+@mixin opacity ($opacity: 0.5) {
+	opacity: $opacity;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity * 100})";
+	filter: alpha(opacity=#{$opacity * 100});
+}

@@ -1,0 +1,33 @@
+/* ==========================================================================
+   HTML
+   ========================================================================== */
+
+h1, h2, h3, h4, h5 {
+	font-weight: normal;
+	line-height: 1em;
+	margin: 0em 0em 1em;
+}
+
+p {
+	font-weight: normal;
+	line-height: 1.5em;
+	margin: 0em 0em 1em;
+}
+
+/* ==========================================================================
+   Application
+   ========================================================================== */
+
+body {
+	font-family: $font_sans;
+	font-size: $font_base;
+	font-weight: normal;
+	color: $color_text;
+
+	-webkit-font-smoothing: subpixel-antialiased;
+	text-rendering: optimizelegibility;
+}
+
+/* ==========================================================================
+   Classes
+   ========================================================================== */

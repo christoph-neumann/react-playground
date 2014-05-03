@@ -1,0 +1,37 @@
+{
+  "name": "react-playground",
+  "version": "0.0.1",
+  "author": {
+    "name": "Christoph Neumann",
+    "email": "christoph@neumannhaus.com",
+    "url": "http://neumannhaus.com"
+  },
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "react": "~0.10.0",
+    "underscore": "~1.6.0"
+  },
+  "devDependencies": {
+    "browserify": "~3.44.2",
+    "gulp": "~3.6.2",
+    "gulp-clean": "~0.2.4",
+    "gulp-concat": "~2.2.0",
+    "gulp-imagemin": "~0.5.0",
+    "gulp-print": "~1.0.3",
+    "gulp-rename": "~1.2.0",
+    "gulp-sass": "~0.7.1",
+    "gulp-streamify": "0.0.5",
+    "gulp-template": "~0.1.1",
+    "gulp-uglify": "~0.2.1",
+    "gulp-util": "~2.2.12",
+    "gulp-watch": "~0.6.2",
+    "node-serialize": "0.0.3",
+    "reactify": "~0.13.1",
+    "vinyl-source-stream": "~0.1.1"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  }
+}

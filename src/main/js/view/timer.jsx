@@ -2,6 +2,7 @@
 'use strict'
 
 var React = require('react')
+var ctl = require('../widget')
 
 var Timer = React.createClass({
 
@@ -32,10 +33,11 @@ var Timer = React.createClass({
 	},
 
 	render: function() {
+		var PhotoBox = ctl.PhotoBox
 		return (
 			<div>{
 				this.state.seconds <= 0
-				? <div><img src="images/espresso.png"/><br/>Coffee Time!</div>
+				? <PhotoBox src="images/espresso.png" caption="Coffee Time!"/>
 				: <div>Only {this.state.seconds} more seconds!</div>
 			}</div>
 		)

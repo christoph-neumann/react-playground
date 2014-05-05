@@ -17,6 +17,7 @@ var watch = require('gulp-watch')
 
 // Other node libraries
 var browserify = require('browserify')
+var _m = require('mori')
 var serialize = require('node-serialize')
 var stream = require('stream')
 var source = require('vinyl-source-stream')
@@ -27,6 +28,11 @@ var pkg = require('./package.json')
 
 gutil.log(gutil.colors.yellow('Name'), gutil.colors.cyan(pkg.name))
 gutil.log(gutil.colors.yellow('Version'), gutil.colors.cyan(pkg.version))
+
+
+// Libraries the app depends on
+var libs = _m.keys(_m.js_to_clj(pkg.dependencies))
+gutil.log("3rd party libraries: "+ _m.clj_to_js(libs).join(" "))
 
 
 gulp.task('clean', function() {
@@ -42,26 +48,32 @@ gulp.task('images', function(){
 })
 
 gulp.task('vendor', function() {
-	return browserify()
-		.require('jquery')
-		.require('react')
-		.require('mori')
+	var b = browserify()
+
+	gutil.log("Creating a vendor bundle for:")
+	_m.each(libs, function (name) {
+		gutil.log("  "+ name)
+		b.require(name)
+	})
+
+	return b
 		.bundle()
 		.pipe(source('vendor.js'))
 		.pipe(gulp.dest('./build/dev'))
 		.pipe(rename('vendor-'+ pkg.version +'.js'))
-		.pipe(streamify(uglify()))
 		.pipe(gulp.dest('./build/dist'))
 })
 
 gulp.task('bundle', function() {
-	return browserify({
+	var b = browserify({
 			entries: ['./src/main/js/app.js'],
 			extensions: ['.jsx'],
 		})
-		.exclude('jquery')
-		.exclude('react')
-		.exclude('mori')
+	_m.each(libs, function (name) {
+		b.exclude(name)
+	})
+
+	return b
 		.bundle()
 		.pipe(source('bundle.js'))
 		.pipe(gulp.dest('./build/dev'))

@@ -9,16 +9,33 @@ var Item = require('./item')
 var ToDoList = React.createClass({
 
 	getInitialState: function() {
-		return {
-			list: m.js_to_clj([
-				{ id: 1, done: false, description: "Item on the list" },
-				{ id: 2, done: true, description: "Second item on the list" }
-			])
-		}
+		return { items: m.vector() }
 	},
 
-	listMarkup: function (item) {
-		console.log(item)
+	keyListener: function(e) {
+		if ( e.keyCode !== 13 ) {
+			return false
+		}
+		var new_item = this.refs.new_item.getDOMNode()
+		var text = new_item.value.trim()
+		new_item.value = ""
+		this.props.model.addItem(text)
+		return false
+	},
+
+	modelListener: function (data) {
+		this.replaceState({ items: m.get(data, 'items') })
+	},
+
+	componentDidMount: function() {
+		this.props.model.listen(this.modelListener)
+	},
+
+	componentWillUnmount: function() {
+		this.props.model.unlisten(this.modelListener)
+	},
+
+	itemMarkup: function (item) {
 		return <Item key={m.get(item, "id")}>{ m.get(item, "description") }</Item>
 	},
 
@@ -27,9 +44,9 @@ var ToDoList = React.createClass({
 			<div className="todo-list">
 				<div className="header">
 					<div className="prompt">»</div>
-					<div className="input"><input type="text" placeholder="What needs to be done?"/></div>
+					<div className="input"><input ref="new_item" type="text" placeholder="What needs to be done?" onKeyUp={this.keyListener}/></div>
 				</div>
-				{ m.clj_to_js(m.map(this.listMarkup, this.state.list)) }
+				{ m.clj_to_js(m.map(this.itemMarkup, this.state.items)) }
 			</div>
 		)
 	}

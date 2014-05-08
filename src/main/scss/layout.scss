@@ -125,4 +125,18 @@ input {
 			color: $todo_color_delete;
 		}
 	}
+
+	.trans-item-enter {
+		opacity: 0.01;
+		transition: opacity .3s ease-in;
+
+		&.trans-item-enter-active { opacity: 1; }
+	}
+
+	.trans-item-leave {
+		opacity: 1;
+		transition: opacity .3s ease-in;
+
+		&.trans-item-leave-active { opacity: 0.01; }
+	}
 }

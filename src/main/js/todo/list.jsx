@@ -2,6 +2,7 @@
 'use strict'
 
 var React = require('react')
+var ReactCSSTransitionGroup = require('react/addons').addons.CSSTransitionGroup
 var m = require('mori')
 
 var Item = require('./item')
@@ -47,7 +48,9 @@ var ToDoList = React.createClass({
 					<div className="prompt">»</div>
 					<div className="input"><input ref="new_item" type="text" placeholder="What needs to be done?" onKeyUp={this.keyListener}/></div>
 				</div>
+				<ReactCSSTransitionGroup transitionName="trans-item">
 				{ m.clj_to_js(m.map(this.itemMarkup, this.state.items)) }
+				</ReactCSSTransitionGroup>
 			</div>
 		)
 	}

@@ -55,6 +55,7 @@ gulp.task('vendor', function() {
 		gutil.log("  "+ name)
 		b.require(name)
 	})
+	b.require('react/addons')
 
 	return b
 		.bundle()
@@ -72,6 +73,7 @@ gulp.task('bundle', function() {
 	_m.each(libs, function (name) {
 		b.exclude(name)
 	})
+	b.exclude('react/addons')
 
 	return b
 		.bundle()

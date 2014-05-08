@@ -24,6 +24,12 @@ var ToDoList = React.createClass({
 		return false
 	},
 
+	removeListener: function (id) {
+		console.log("remove: "+ id)
+		this.props.model.removeItem(id)
+		return false
+	},
+
 	modelListener: function (data) {
 		this.replaceState({ items: m.get(data, 'items') })
 	},
@@ -38,7 +44,8 @@ var ToDoList = React.createClass({
 	},
 
 	itemMarkup: function (item) {
-		return <Item key={m.get(item, "id")}>{ m.get(item, "description") }</Item>
+		var id = m.get(item, "id")
+		return <Item key={id} onClick={this.removeListener.bind(this, id)}>{ m.get(item, "description") }</Item>
 	},
 
 	render: function() {

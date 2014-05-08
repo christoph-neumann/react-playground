@@ -30,6 +30,12 @@ function TodoModel() {
 		notify()
 	}
 
+	function removeItem(id) {
+		var items = m.into(m.vector(), m.filter(function(item) { return m.get(item, 'id') !== id }, m.get(current, 'items')))
+		current = m.assoc(current, 'items', items)
+		notify()
+	}
+
 	// Init
 	addItem("Item on the list")
 	addItem("Second item on the list")
@@ -39,6 +45,7 @@ function TodoModel() {
 	this.unlisten = unlisten
 
 	this.addItem = addItem
+	this.removeItem = removeItem
 }
 
 module.exports = TodoModel

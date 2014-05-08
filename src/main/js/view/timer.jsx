@@ -29,6 +29,7 @@ var Timer = React.createClass({
 	},
 
 	componentWillUnmount: function() {
+		console.log("Removing Timer")
 		clearInterval(this.interval)
 	},
 

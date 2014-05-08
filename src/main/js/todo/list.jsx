@@ -32,6 +32,7 @@ var ToDoList = React.createClass({
 	},
 
 	componentWillUnmount: function() {
+		console.log("Removing ToDoList")
 		this.props.model.unlisten(this.modelListener)
 	},
 

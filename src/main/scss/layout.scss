@@ -64,10 +64,49 @@ input {
 }
 
 .slider {
+	margin: 5px;
+	position: relative;
+	width: 5 * $panel_width + 2;
+	height: $panel_height + 4;
+	overflow: hidden;
+
+	.tray {
+		position: absolute;
+		right: 2px;
+	}
+
 	.panel {
-		display: inline-block;
-		width: 100px;
-		height: 175px;
+		position: absolute;
+		top: 2px;
+		width: $panel_width;
+		height: $panel_height;
+		text-align: center;
+		.text {
+			color: white;
+			margin-top: 45%;
+		}
+	}
+
+	.window {
+		position: absolute;
+		width: $panel_width;
+		height: $panel_height;
+		left: (4 * $panel_width) - 2;
+		border: 2px solid #666;
+		text-align: center;
+
+		.add, .back {
+			display: block;
+			position: absolute;
+			color: white;
+			text-decoration: none;
+			top: 0;
+			width: 30px;
+			height: 30px;
+			background-color: rgba(0,0,0,0.2);
+		}
+		.add { right: 0; }
+		.back { left: 0; }
 	}
 }
 

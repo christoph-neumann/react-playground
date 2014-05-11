@@ -63,6 +63,14 @@ input {
 	}
 }
 
+.slider {
+	.panel {
+		display: inline-block;
+		width: 100px;
+		height: 175px;
+	}
+}
+
 .todo-list {
 	position: relative;
 	width: 600px;

@@ -12,6 +12,7 @@ var Welcome = React.createClass({
 			<ul>
 				<li><a href="#/timer">Timer</a></li>
 				<li><a href="#/todo">To Do List</a></li>
+				<li><a href="#/slider">Sliding Panels</a></li>
 			</ul>
 			</div>
 		)

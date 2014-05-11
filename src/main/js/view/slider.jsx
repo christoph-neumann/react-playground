@@ -2,6 +2,7 @@
 'use strict'
 
 var events = require('events')
+var $ = require('jquery')
 var React = require('react')
 var _m = require('mori')
 
@@ -23,7 +24,28 @@ var Slider = React.createClass({
 	},
 
 	modelListener: function (current) {
-		this.setState(current)
+		var w = this
+
+		var $tray = $(this.refs.tray.getDOMNode())
+		$tray.removeClass('trans')
+		if ( current.kind == 'add' ) {
+			this.setState(current)
+			$tray.css('right', '-98px');
+			setTimeout(function () {
+				$tray.addClass('trans')
+				$tray.css('right', '2px');
+			}, 0)
+		} else if ( current.kind == 'pop' ) {
+			setTimeout(function () {
+				$tray.addClass('trans')
+				$tray.css('right', '-98px');
+				setTimeout(function () {
+					$tray.removeClass('trans')
+					w.setState(current)
+					$tray.css('right', '2px');
+				}, 300)
+			}, 0)
+		}
 	},
 
 	componentDidMount: function() {
@@ -52,7 +74,7 @@ var Slider = React.createClass({
 		var s = this.state
 		return (
 			<div className="slider">
-				<div className="tray">
+				<div ref="tray" className="tray" style={{width: (s.size + 1) * 100 }}>
 					{ _m.clj_to_js(_m.map(_m.partial(this.panel, s.size), s.stack)) }
 				</div>
 				<div className="window">
@@ -74,8 +96,10 @@ function SliderModel() {
 	var stack = _m.list()
 
 
-	function notify() {
-		emitter.emit('change', current())
+	function notify(kind) {
+		var c = current()
+		c.kind = kind
+		emitter.emit('change', c)
 	}
 
 	function listen(listener) {
@@ -98,18 +122,18 @@ function SliderModel() {
 	function add() {
 		id += 1
 		stack = _m.conj(stack, _m.hash_map('id', id, 'color', rand_color()))
-		notify()
+		notify('add')
 	}
 
 	function pop() {
 		if ( id == 0 ) return
-		stack = _m.rest(stack)
 		id -= 1
-		notify()
+		stack = _m.rest(stack)
+		notify('pop')
 	}
 
 	function current() {
-		return { stack: stack, size: id }
+		return { stack: stack, size: id, kind: 'init' }
 	}
 
 	// Public

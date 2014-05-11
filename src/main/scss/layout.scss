@@ -71,8 +71,13 @@ input {
 	overflow: hidden;
 
 	.tray {
+		&.trans {
+			@include transition(right .3s ease-in-out);
+		}
 		position: absolute;
 		right: 2px;
+		background-color: #eee;
+		height: $panel_height + 4;
 	}
 
 	.panel {

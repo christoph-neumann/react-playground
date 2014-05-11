@@ -69,3 +69,10 @@
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity * 100})";
 	filter: alpha(opacity=#{$opacity * 100});
 }
+
+@mixin transition ($rules...) {
+	-webkit-transition: $rules;
+	-moz-transition: $rules;
+	-o-transition: $rules;
+	transition: $rules;
+}

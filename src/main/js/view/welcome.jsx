@@ -10,6 +10,7 @@ var Welcome = React.createClass({
 			<div className="welcome">
 			Pick a Demo:
 			<ul>
+				<li><a href="#/nested">Deep Nesting</a></li>
 				<li><a href="#/timer">Timer</a></li>
 				<li><a href="#/todo">To Do List</a></li>
 				<li><a href="#/slider">Sliding Panels</a></li>

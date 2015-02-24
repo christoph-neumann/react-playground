@@ -8,6 +8,7 @@ var TodoModel = todo.Model
 
 var routes = {
 	"/welcome": function() { return view.Welcome() },
+	"/nested": function() { return view.Nested() },
 	"/slider": function() { return view.Slider() },
 	"/timer": function() { return view.Timer({ seconds: config.timer_seconds }) },
 	"/todo": function () { return todo.List({ model: new TodoModel() }) }

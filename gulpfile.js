@@ -16,8 +16,8 @@ var uglify = require('gulp-uglify')
 var watch = require('gulp-watch')
 
 // Other node libraries
+var _ = require('underscore')
 var browserify = require('browserify')
-var _m = require('mori')
 var serialize = require('node-serialize')
 var stream = require('stream')
 var source = require('vinyl-source-stream')
@@ -31,8 +31,8 @@ gutil.log(gutil.colors.yellow('Version'), gutil.colors.cyan(pkg.version))
 
 
 // Libraries the app depends on
-var libs = _m.keys(_m.js_to_clj(pkg.dependencies))
-gutil.log("3rd party libraries: "+ _m.clj_to_js(libs).join(" "))
+var libs = _.keys(pkg.dependencies)
+gutil.log("3rd party libraries: "+ libs.join(" "))
 
 
 gulp.task('clean', function() {
@@ -51,7 +51,7 @@ gulp.task('vendor', function() {
 	var b = browserify()
 
 	gutil.log("Creating a vendor bundle for:")
-	_m.each(libs, function (name) {
+	_.each(libs, function (name) {
 		gutil.log("  "+ name)
 		b.require(name)
 	})
@@ -70,7 +70,7 @@ gulp.task('bundle', function() {
 			entries: ['./src/main/js/app.js'],
 			extensions: ['.jsx'],
 		})
-	_m.each(libs, function (name) {
+	_.each(libs, function (name) {
 		b.exclude(name)
 	})
 	b.exclude('react/addons')

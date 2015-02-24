@@ -77,6 +77,10 @@ gulp.task('bundle', function() {
 
 	return b
 		.bundle()
+		.on('error', function(err){
+			log_error(err)
+			this.emit('end') // end this stream to make gulp happy
+		})
 		.pipe(source('bundle.js'))
 		.pipe(gulp.dest('./build/dev'))
 		.pipe(rename('bundle-'+ pkg.version +'.js'))
@@ -149,6 +153,16 @@ gulp.task('watch', ['build'], function() {
 
 gulp.task('default', ['build'])
 
+
+function log_error(err) {
+	if ( typeof err.message !== 'undefined' ) {
+		gutil.log(err.message)
+	}
+	var cleaned = _.omit(err, 'stream')
+	if ( _.keys(cleaned).length > 0 ) {
+		gutil.log(cleaned)
+	}
+}
 
 function js_tag(path) {
 	return '<script src="'+ path +'"></script>'

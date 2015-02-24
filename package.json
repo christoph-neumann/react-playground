@@ -14,21 +14,21 @@
   },
   "devDependencies": {
     "browserify": "~3.46.0",
-    "gulp": "~3.6.2",
-    "gulp-clean": "~0.2.4",
-    "gulp-concat": "~2.2.0",
-    "gulp-imagemin": "~0.5.0",
-    "gulp-print": "~1.0.3",
+    "gulp": "3.8.11",
+    "gulp-clean": "0.3.1",
+    "gulp-concat": "2.5.2",
+    "gulp-imagemin": "2.2.1",
+    "gulp-print": "1.1.0",
     "gulp-rename": "~1.2.0",
-    "gulp-sass": "~0.7.1",
+    "gulp-sass": "1.3.3",
     "gulp-streamify": "0.0.5",
-    "gulp-template": "~0.1.1",
-    "gulp-uglify": "~0.2.1",
-    "gulp-util": "~2.2.12",
-    "gulp-watch": "~0.6.2",
+    "gulp-template": "3.0.0",
+    "gulp-uglify": "1.1.0",
+    "gulp-util": "3.0.4",
+    "gulp-watch": "4.1.1",
     "node-serialize": "0.0.3",
     "reactify": "~0.13.1",
-    "vinyl-source-stream": "~0.1.1"
+    "vinyl-source-stream": "1.0.0"
   },
   "browserify": {
     "transform": [
